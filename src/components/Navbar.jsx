@@ -9,7 +9,7 @@ function Navbar() {
         {/* Logo */}
         <a href="#" className="flex items-center space-x-3">
           <img
-            src="/src/assets/logo-weather.png"
+            src="../assets/logo-weather.png"
             className="w-20"
             alt="Weather Site Logo"
           />
