@@ -9,10 +9,11 @@ function Navbar() {
         {/* Logo */}
         <a href="#" className="flex items-center space-x-3">
           <img
-            src="./public/assets/logo-weather.png"
-            className="w-20"
+            src="/assets/logo-weather.png"
+            className="w-20 text-white"
             alt="Weather Site Logo"
           />
+
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             ამინდი
           </span>
@@ -88,10 +89,11 @@ function Navbar() {
         <div className="w-full px-4 text-center">
           <a href="#" className="flex items-center space-x-3">
             <img
-              src="./public/assets/logo-weather.png"
-              className="w-20"
+              src="/assets/logo-weather.png"
+              className="w-20 text-white"
               alt="Weather Site Logo"
             />
+
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               ამინდი
             </span>
