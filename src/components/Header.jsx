@@ -1,0 +1,36 @@
+import { Navbar } from "./Navbar";
+
+export default function Header() {
+  return (
+    <div className="min-h-screen flex flex-col justify-between">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Hero Section */}
+      <section className="bg-center bg-no-repeat min-h-fit bg-[url('https://wmo.int/sites/default/files/2023-12/thumbnails_5.jpg')] bg-cover bg-gray-300 bg-blend-multiply">
+        <div className="px-4 mx-auto max-w-screen-xl max-h-full text-center py-20">
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+            ამინდის პროგნოზი
+          </h1>
+          <p className="mb-4 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+            OpenWeather
+          </p>
+          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <a
+              href="#"
+              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+            >
+              Get started
+            </a>
+            <a
+              href="#"
+              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
+            >
+              Learn more
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
