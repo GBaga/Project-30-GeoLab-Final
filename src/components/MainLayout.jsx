@@ -28,7 +28,7 @@ function MainLayout() {
         </div>
       </section>
 
-      <div className="p-10 mx-auto max-w-7xl w-full ">
+      <div className="outlets-css p-0 sm:p-10 mx-auto max-w-7xl w-full ">
         <Outlet />
       </div>
 

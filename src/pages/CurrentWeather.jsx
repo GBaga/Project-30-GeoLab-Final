@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import WeatherLoader from "../components/WeatherLoader";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
@@ -40,13 +41,13 @@ const CurrentWeather = () => {
   }, []);
 
   return (
-    <div className="min-h-fit  flex flex-wrap justify-center gap-6 p-6 bg-gray-100">
+    <div className="min-h-fit flex flex-wrap justify-center gap-6 p-6 bg-gray-100">
       {error && <p className="text-red-500">Error: {error}</p>}
       {weatherData.length > 0 ? (
         weatherData.map((weather, index) => (
           <div
             key={index}
-            className="flex flex-col bg-white rounded p-4 w-full  max-w-[500px] shadow-lg"
+            className="flex flex-col bg-white rounded p-4 w-full max-w-[500px] shadow-lg"
           >
             <div className="font-bold text-xl">
               {weather.city} / {weather.name}
@@ -58,6 +59,14 @@ const CurrentWeather = () => {
                 month: "long",
                 year: "numeric",
               })}
+              <div>
+                {new Date().toLocaleTimeString("ka-GE", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hourCycle: "h23",
+                })}
+              </div>
             </div>
             <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-fit">
               <img
@@ -72,14 +81,9 @@ const CurrentWeather = () => {
               </div>
               <div className="flex flex-col items-center ml-6">
                 <div>{weather.weather[0].description}</div>
-                <div className="mt-1 text-sm text-gray-500">
-                  ⬆ {weather.main.temp_max}°C
-                </div>
-                <div className="text-sm text-gray-500">
-                  ⬇ {weather.main.temp_min}°C
-                </div>
               </div>
             </div>
+
             <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
               <div className="flex flex-col items-center">
                 <div className="font-medium">ქარი</div>
@@ -98,12 +102,12 @@ const CurrentWeather = () => {
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              ისტორიული ამინდი
+              5 დღის პროგნოზი
             </button>
           </div>
         ))
       ) : (
-        <p>Loading weather data...</p>
+        <WeatherLoader />
       )}
     </div>
   );

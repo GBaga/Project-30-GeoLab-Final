@@ -70,20 +70,33 @@ const History = () => {
     (2025 - i).toString()
   );
 
+  const getTemperatureColor = (currentTemp, previousTemp) => {
+    if (previousTemp === null) return "black"; // No previous temperature to compare
+    const change = currentTemp - previousTemp;
+    if (change > 0) {
+      const redIntensity = Math.min(255, 255 * (change / 10)); // Adjust the red intensity based on change
+      return `rgb(${redIntensity}, 0, 0)`; // More red for rising temperature
+    } else if (change < 0) {
+      const blueIntensity = Math.min(255, 255 * (-change / 10)); // Adjust the blue intensity based on change
+      return `rgb(0, 0, ${blueIntensity})`; // More blue for decreasing temperature
+    }
+    return "black"; // No change
+  };
+
   if (loading) {
     return <WeatherLoader />;
   }
 
   return (
     <div className="w-full p-4">
-      <h2 className="text-2xl font-bold mb-4">
-        მატნის საშუალო თვიური ტემპერატურა (°C)
+      <h2 className="text-xl font-bold mb-4">
+        მატნის საშუალო თვიური ტემპერატურა წლების მიხედვით (°C)
       </h2>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-400 w-full text-sm">
           <thead>
             <tr>
-              <th className="border border-gray-400 p-2 bg-gray-200">Year</th>
+              <th className="border border-gray-400 p-2 bg-gray-200">წელი</th>
               {months.map(({ key, label }) => (
                 <th
                   key={key}
@@ -95,18 +108,37 @@ const History = () => {
             </tr>
           </thead>
           <tbody>
-            {years.map((year) => (
-              <tr key={year}>
-                <td className="border border-gray-400 p-2 font-bold">{year}</td>
-                {months.map(({ key }) => (
-                  <td key={key} className="border border-gray-400 p-2">
-                    {weatherData[year]?.[key]
-                      ? weatherData[year][key].toFixed(1)
-                      : "-"}
+            {years.map((year) => {
+              let previousMonthTemp = null; // To track the previous month for each year
+              return (
+                <tr key={year}>
+                  <td className="border border-gray-400 p-2 font-bold">
+                    {year}
                   </td>
-                ))}
-              </tr>
-            ))}
+                  {months.map(({ key }) => {
+                    const currentMonthTemp = weatherData[year]?.[key];
+                    const color = getTemperatureColor(
+                      currentMonthTemp,
+                      previousMonthTemp
+                    );
+
+                    previousMonthTemp = currentMonthTemp; // Update for next comparison
+
+                    return (
+                      <td
+                        key={key}
+                        className="border border-gray-400 p-2"
+                        style={{
+                          color: currentMonthTemp ? color : "black",
+                        }}
+                      >
+                        {currentMonthTemp ? currentMonthTemp.toFixed(1) : "-"}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
