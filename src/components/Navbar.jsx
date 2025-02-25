@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -7,7 +8,7 @@ function Navbar() {
     <nav className="border-gray-700 bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
         {/* Logo */}
-        <a href="#" className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-3">
           <img
             src="/assets/logo-weather.png"
             className="w-20 text-white"
@@ -17,33 +18,33 @@ function Navbar() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             ამინდი
           </span>
-        </a>
+        </Link>
 
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-800 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
               >
                 მთავარი
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/history"
                 className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
               >
                 თვიური ისტორია
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                to="/detailed-history"
                 className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
               >
-                ისტორია დეტალურად
-              </a>
+                დეტალური ისტორია
+              </Link>
             </li>
           </ul>
         </div>
@@ -87,33 +88,38 @@ function Navbar() {
         </button>
 
         <div className="w-full px-4 text-center">
-          <a href="#" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <img
               src="/assets/logo-weather.png"
-              className="w-20 text-white"
+              className="w-20 mb-12 text-white"
               alt="Weather Site Logo"
             />
 
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+            <span
+              onClick={() => setMenuOpen(false)}
+              className="self-center text-2xl font-semibold whitespace-nowrap text-white"
+            >
               ამინდი
             </span>
-          </a>
+          </Link>
           {/* <p className="mb-4 text-lg font-normal text-gray-300">OpenWeather</p> */}
 
           {/* Mobile Buttons */}
           <div className="flex flex-col space-y-4  sm:justify-center ">
-            <a
-              href="#"
+            <Link
+              to="/history"
+              onClick={() => setMenuOpen(false)}
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
             >
               თვიური ისტორია
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              onClick={() => setMenuOpen(false)}
+              to="detailed-history"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
             >
-              ისტორია დეტალურად
-            </a>
+              დეტალური ისტორია
+            </Link>
 
             <a
               href="#"

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Papa from "papaparse";
-import WeatherLoader from "../components/WeatherLoader";
+import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 
 const DailyTemp = () => {
   const [weatherData, setWeatherData] = useState({});
@@ -11,7 +11,7 @@ const DailyTemp = () => {
 
   useEffect(() => {
     axios
-      .get("/public/history-weather.csv")
+      .get("/public/assets/history-weather.csv")
       .then((response) => {
         Papa.parse(response.data, {
           header: true,

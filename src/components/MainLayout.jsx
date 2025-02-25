@@ -7,8 +7,6 @@ function MainLayout() {
 
   return (
     <div className="min-h-screen flex  flex-col  justify-between">
-      <Navbar />
-
       {/* <nav className="border-gray-700 bg-gray-900">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
@@ -81,15 +79,17 @@ function MainLayout() {
         </div>
       </nav> */}
 
-      <section className="bg-center  min-h-fit bg-[url('https://wmo.int/sites/default/files/2023-12/thumbnails_5.jpg')] bg-cover bg-gray-300 bg-blend-multiply ">
-        <div className="px-4 mx-auto max-w-screen-xl max-h-full pb-40 ">
-          {/* <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+      <header>
+        <Navbar />
+        <section className="bg-center  min-h-fit bg-[url('/assets/hero-image.jpg')] bg-cover bg-gray-300 bg-blend-multiply ">
+          <div className="px-4 mx-auto max-w-screen-xl max-h-full pb-40 ">
+            {/* <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
             ამინდის პროგნოზი
           </h1> */}
-          <p className="mb-4 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
-            OpenWeather
-          </p>
-          {/* <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+            <p className="mb-4 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+              OpenWeather
+            </p>
+            {/* <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <a
               href="#"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
@@ -103,10 +103,10 @@ function MainLayout() {
               Learn more
             </a>
           </div> */}
-        </div>
+          </div>
 
-        {/* Navigation Links (Always Visible on md+ and Toggleable on Mobile) */}
-        {/* <div
+          {/* Navigation Links (Always Visible on md+ and Toggleable on Mobile) */}
+          {/* <div
           className={`px-4 mx-auto max-w-screen-xl max-h-full text-center py-20  ${
             menuOpen ? "flex flex-col w-full" : "hidden"
           } items-center mt-4 md:mt-0 md:space-x-8 md:flex-row`}
@@ -127,7 +127,8 @@ function MainLayout() {
             </a>
           </div>
         </div> */}
-      </section>
+        </section>
+      </header>
 
       <div className="outlets-css p-0 sm:p-10 mx-auto max-w-7xl w-full ">
         <Outlet />
@@ -135,8 +136,8 @@ function MainLayout() {
 
       <footer className="bg-gray-900">
         <div className="mx-auto w-full max-w-screen-xl">
-          {/* <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
-            <div>
+          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+            {/* <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 Company
               </h2>
@@ -238,8 +239,8 @@ function MainLayout() {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div> */}
+            </div>*/}
+          </div>
           <div className="h-40 px-4 py-6 border-t border-t-gray-700 md:flex md:items-center md:justify-between">
             <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
               © 2025 GBaga. ყველა უფლება დაცულია

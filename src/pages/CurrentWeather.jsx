@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import WeatherLoader from "../components/WeatherLoader";
+import WeatherLoader from "../components/weatherLoader/WeatherLoader";
+import { Link } from "react-router";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
@@ -98,12 +99,13 @@ const CurrentWeather = () => {
                 <div>{(weather.visibility / 1000).toFixed(1)} km</div>
               </div>
             </div>
-            <button
+            <Link
+              to="/forecast"
               type="button"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
               5 დღის პროგნოზი
-            </button>
+            </Link>
           </div>
         ))
       ) : (

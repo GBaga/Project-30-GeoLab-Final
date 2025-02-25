@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Papa from "papaparse";
-import WeatherLoader from "../../components/WeatherLoader";
+import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 
 const History = () => {
   const [weatherData, setWeatherData] = useState({});

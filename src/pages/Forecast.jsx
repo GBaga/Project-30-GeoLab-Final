@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import WeatherLoader from "../../components/WeatherLoader";
+import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 
 function Forecast() {
   const [weatherData, setWeatherData] = useState(null);

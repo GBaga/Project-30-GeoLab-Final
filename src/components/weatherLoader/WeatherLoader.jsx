@@ -1,4 +1,4 @@
-import "../index.css"; // Import the CSS for keyframes
+import "./weatherLoader.css"; // Import the CSS for keyframes
 
 const WeatherLoader = () => {
   return (
