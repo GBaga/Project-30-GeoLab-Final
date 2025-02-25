@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,10 +11,9 @@ function Navbar() {
         <Link to="/" className="flex items-center space-x-3">
           <img
             src="/assets/logo-weather.png"
-            className="w-20 text-white"
+            className="w-20"
             alt="Weather Site Logo"
           />
-
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             ამინდი
           </span>
@@ -76,8 +75,10 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 flex flex-col justify-center items-center transition-all duration-300 ${
-          menuOpen ? "flex" : "hidden"
+        className={`fixed inset-0 bg-gray-900 bg-opacity-95 flex flex-col justify-center items-center transition-all duration-300 ${
+          menuOpen
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
         } md:hidden`}
       >
         <button
@@ -91,10 +92,9 @@ function Navbar() {
           <Link to="/" className="flex items-center space-x-3">
             <img
               src="/assets/logo-weather.png"
-              className="w-20 mb-12 text-white"
+              className="w-20 mb-12"
               alt="Weather Site Logo"
             />
-
             <span
               onClick={() => setMenuOpen(false)}
               className="self-center text-2xl font-semibold whitespace-nowrap text-white"
@@ -102,10 +102,9 @@ function Navbar() {
               ამინდი
             </span>
           </Link>
-          {/* <p className="mb-4 text-lg font-normal text-gray-300">OpenWeather</p> */}
 
           {/* Mobile Buttons */}
-          <div className="flex flex-col space-y-4  sm:justify-center ">
+          <div className="flex flex-col space-y-4 sm:justify-center">
             <Link
               to="/history"
               onClick={() => setMenuOpen(false)}
@@ -115,7 +114,7 @@ function Navbar() {
             </Link>
             <Link
               onClick={() => setMenuOpen(false)}
-              to="detailed-history"
+              to="/detailed-history"
               className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
             >
               დეტალური ისტორია

@@ -34,6 +34,8 @@ function MainLayout() {
                 <TERipple rippleColor="light">
                   <Link
                     to="https://www.linkedin.com/in/goga-bagauri-16145344"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-block rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
                     style={{ backgroundColor: "#0077b5" }}
                   >
@@ -51,6 +53,8 @@ function MainLayout() {
                 <TERipple rippleColor="light">
                   <Link
                     to="https://github.com/GBaga"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-block rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
                     style={{ backgroundColor: "#333" }}
                   >
@@ -68,6 +72,8 @@ function MainLayout() {
                 <TERipple rippleColor="light">
                   <Link
                     to="https://x.com/GBagauri"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     data-twe-ripple-init
                     data-twe-ripple-color="light"
                     className="mb-2 inline-block rounded bg-black px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
@@ -88,7 +94,8 @@ function MainLayout() {
               {/* Footer Text */}
               <Link
                 to="https://gbaga.github.io/Project-20-My-Portfolio-Design/"
-                target="blank"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm text-gray-500 dark:text-gray-300 sm:text-center md:order-first"
               >
                 © 2025 GBaga. ყველა უფლება დაცულია

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { data } from "react-router";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273"; // Replace with your actual API key
 const city = "Tbilisi";
