@@ -1,31 +1,31 @@
 /* From Uiverse.io by zanina-yassine */
-.container {
+/* .container {
   width: 250px;
   height: 250px;
   padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.cloud {
+/* .cloud {
   width: 250px;
-}
+} */
 
 .front {
-  padding-top: 45px;
+  /* padding-top: 45px;
   margin-left: 25px;
   display: inline;
   position: absolute;
-  z-index: 11;
+  z-index: 11; */
   animation: clouds 8s infinite;
   animation-timing-function: ease-in-out;
 }
 
 .back {
-  margin-top: -30px;
+  /* margin-top: -30px;
   margin-left: 150px;
-  z-index: 12;
+  z-index: 12; */
   animation: clouds 12s infinite;
   animation-timing-function: ease-in-out;
 }
