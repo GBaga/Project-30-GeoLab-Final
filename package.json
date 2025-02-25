@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.10.0",
     "axios": "^1.7.9",
+    "dotenv-load": "^3.0.0",
+    "next-env": "^1.1.1",
     "npx": "file:",
     "papaparse": "^5.5.2",
     "react": "^19.0.0",
