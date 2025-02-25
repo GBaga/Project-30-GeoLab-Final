@@ -11,7 +11,7 @@ const DailyTemp = () => {
 
   useEffect(() => {
     axios
-      .get("/public/assets/history-weather.csv")
+      .get("/public/assets/weather.csv")
       .then((response) => {
         Papa.parse(response.data, {
           header: true,
@@ -113,11 +113,6 @@ const DailyTemp = () => {
       return `rgb(0, 0, ${blueIntensity})`; // More blue for decreasing temperature
     }
     return "black"; // No change
-  };
-
-  const getTemperatureColorForAverage = (averageTemp, previousTemp) => {
-    const change = previousTemp ? averageTemp - previousTemp : 0;
-    return getTemperatureColor(change); // Use the same color logic for average temperature
   };
 
   if (loading) {

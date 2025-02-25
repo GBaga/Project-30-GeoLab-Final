@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { Link } from "react-router";
-import CsvToJsonComponent from "../components/CsvToJsonComponent";
-import Handler from "../components/Handler";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
@@ -45,8 +43,6 @@ const CurrentWeather = () => {
 
   return (
     <div className="min-h-fit flex flex-wrap justify-center gap-6 p-6 bg-gray-100">
-      <CsvToJsonComponent />
-      <Handler />
       {error && <p className="text-red-500">Error: {error}</p>}
       {weatherData.length > 0 ? (
         weatherData.map((weather, index) => (

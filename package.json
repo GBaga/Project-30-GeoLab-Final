@@ -10,15 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "@vercel/blob": "^0.27.1",
     "@vercel/postgres": "^0.10.0",
     "axios": "^1.7.9",
     "dotenv-load": "^3.0.0",
+    "mongodb": "^6.13.1",
     "next-env": "^1.1.1",
     "npx": "file:",
     "papaparse": "^5.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.1.5"
+    "react-router": "^7.1.5",
+    "tw-elements-react": "^1.0.0-alpha-end"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

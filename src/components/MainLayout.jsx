@@ -1,132 +1,21 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import Navbar from "./Navbar";
-import { useState } from "react";
+import { TERipple } from "tw-elements-react";
 
 function MainLayout() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen flex  flex-col  justify-between">
-      {/* <nav className="border-gray-700 bg-gray-900">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a
-            href="#"
-            className="flex items-center space-x-3 rtl:space-x-reverse"
-          >
-            <img
-              src="/src/assets/logo-weather.png"
-              className="w-20"
-              alt="Weather Site Logo"
-            />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-              Flowbite
-            </span>
-          </a>
-          <button
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 md:hidden"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-
-          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-800 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-gray-900">
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
-                >
-                  მთავარი
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
-                >
-                  თვიური ისტორია
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
-                >
-                  ისტორია დეტალურად
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
-
       <header>
         <Navbar />
         <section className="bg-center  min-h-fit bg-[url('/assets/hero-image.jpg')] bg-cover bg-gray-300 bg-blend-multiply ">
           <div className="px-4 mx-auto max-w-screen-xl max-h-full pb-40 ">
-            {/* <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
-            ამინდის პროგნოზი
-          </h1> */}
+            <h1 className="mb-4 text-l font-extrabold tracking-tight leading-none text-gray-200 md:text-5xl lg:text-6xl">
+              ამინდის პროგნოზი
+            </h1>
             <p className="mb-4 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
               OpenWeather
             </p>
-            {/* <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a
-              href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            >
-              Get started
-            </a>
-            <a
-              href="#"
-              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
-            >
-              Learn more
-            </a>
-          </div> */}
           </div>
-
-          {/* Navigation Links (Always Visible on md+ and Toggleable on Mobile) */}
-          {/* <div
-          className={`px-4 mx-auto max-w-screen-xl max-h-full text-center py-20  ${
-            menuOpen ? "flex flex-col w-full" : "hidden"
-          } items-center mt-4 md:mt-0 md:space-x-8 md:flex-row`}
-        >
-          
-          <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <a
-              href="#"
-              className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
-            >
-              Get started
-            </a>
-            <a
-              href="#"
-              className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
-            >
-              Learn more
-            </a>
-          </div>
-        </div> */}
         </section>
       </header>
 
@@ -136,115 +25,75 @@ function MainLayout() {
 
       <footer className="bg-gray-900">
         <div className="mx-auto w-full max-w-screen-xl">
-          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
-            {/* <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Company
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className=" hover:underline">
-                    About
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Careers
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Brand Center
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Blog
-                  </a>
-                </li>
-              </ul>
+          <div className="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4"></div>
+          <div className="h-40 px-4 py-6 border-t border-t-gray-700 flex items-center justify-center md:justify-between gap-5 sm:gap-5">
+            <div className="w-full flex flex-col  items-center gap-8 sm:gap-7 md:flex-row md:justify-between">
+              {/* Icons */}
+              <div className="flex gap-4 justify-center md:justify-start">
+                {/* Linkedin */}
+                <TERipple rippleColor="light">
+                  <Link
+                    to="https://www.linkedin.com/in/goga-bagauri-16145344"
+                    className="inline-block rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                    style={{ backgroundColor: "#0077b5" }}
+                  >
+                    <svg
+                      className="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
+                    </svg>
+                  </Link>
+                </TERipple>
+
+                {/* Github */}
+                <TERipple rippleColor="light">
+                  <Link
+                    to="https://github.com/GBaga"
+                    className="inline-block rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                    style={{ backgroundColor: "#333" }}
+                  >
+                    <svg
+                      className="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                  </Link>
+                </TERipple>
+
+                {/* X (formerly Twitter) */}
+                <TERipple rippleColor="light">
+                  <Link
+                    to="https://x.com/GBagauri"
+                    data-twe-ripple-init
+                    data-twe-ripple-color="light"
+                    className="mb-2 inline-block rounded bg-black px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                  >
+                    <span className="[&>svg]:h-4 [&>svg]:w-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+                      </svg>
+                    </span>
+                  </Link>
+                </TERipple>
+              </div>
+
+              {/* Footer Text */}
+              <Link
+                to="https://gbaga.github.io/Project-20-My-Portfolio-Design/"
+                target="blank"
+                className="text-sm text-gray-500 dark:text-gray-300 sm:text-center md:order-first"
+              >
+                © 2025 GBaga. ყველა უფლება დაცულია
+              </Link>
             </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Help center
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Discord Server
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Twitter
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Facebook
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Legal
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Licensing
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Terms &amp; Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Download
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    iOS
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Android
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Windows
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    MacOS
-                  </a>
-                </li>
-              </ul>
-            </div>*/}
-          </div>
-          <div className="h-40 px-4 py-6 border-t border-t-gray-700 md:flex md:items-center md:justify-between">
-            <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
-              © 2025 GBaga. ყველა უფლება დაცულია
-            </span>
           </div>
         </div>
       </footer>
