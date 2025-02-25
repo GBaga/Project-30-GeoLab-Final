@@ -1,7 +1,6 @@
-import { Link, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
-import SocialNetworks from "./SocialNetworks";
 import Footer from "./Footer";
 
 function MainLayout() {
