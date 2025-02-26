@@ -88,16 +88,17 @@ function Navbar() {
         </button>
 
         <div className="w-full px-4 text-center">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link
+            to="/"
+            className="flex items-center space-x-3"
+            onClick={() => setMenuOpen(false)}
+          >
             <img
               src="/assets/logo-weather.png"
               className="w-20 mb-12"
               alt="Weather Site Logo"
             />
-            <span
-              onClick={() => setMenuOpen(false)}
-              className="self-center text-2xl font-semibold whitespace-nowrap text-white"
-            >
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
               ამინდი
             </span>
           </Link>
@@ -119,12 +120,12 @@ function Navbar() {
               დეტალური ისტორია
             </Link>
 
-            <a
-              href="#"
+            <Link
+              to="#"
               className="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400"
             >
-              ისტორია დეტალურად
-            </a>
+              ეს არ მუშაობს
+            </Link>
           </div>
         </div>
       </div>
