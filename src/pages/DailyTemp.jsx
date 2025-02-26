@@ -11,7 +11,7 @@ const DailyTemp = () => {
 
   useEffect(() => {
     axios
-      .get("/public/assets/weather.csv")
+      .get("/assets/weather.csv")
       .then((response) => {
         Papa.parse(response.data, {
           header: true,

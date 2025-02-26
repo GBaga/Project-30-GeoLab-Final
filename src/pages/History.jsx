@@ -9,7 +9,7 @@ const History = () => {
 
   useEffect(() => {
     axios
-      .get("/public/assets/weather.csv") // Make sure this file is in `public/`
+      .get("/assets/weather.csv") // Make sure this file is in `public/`
       .then((response) => {
         Papa.parse(response.data, {
           header: true,
