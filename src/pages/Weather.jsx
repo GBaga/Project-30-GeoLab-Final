@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 
 const fetchCoordinates = async (city) => {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
   const response = await axios.get(url);
-  if (response.data.length === 0) throw new Error("City not found");
+  if (response.data.length === 0) throw new Error("ქალაქი ვერ მოიძებნა.");
   return response.data[0];
 };
 
@@ -23,7 +23,7 @@ const processWeatherData = (data) => {
   const dailyData = {};
   data.list.forEach((entry) => {
     const date = new Date(entry.dt * 1000);
-    date.setHours(date.getHours() + 4);
+    date.setHours(date.getHours() + 4); // Adjust for UTC+4
     const day = date.toISOString().split("T")[0];
 
     if (!dailyData[day]) {
@@ -35,6 +35,8 @@ const processWeatherData = (data) => {
         description: "",
         icon: "",
         feelsLike: 0,
+        windSpeed: 0,
+        humidity: 0,
       };
     }
 
@@ -49,6 +51,9 @@ const processWeatherData = (data) => {
       entry.main.temp_max
     );
     dailyData[day].feelsLike += entry.main.feels_like;
+    dailyData[day].windSpeed += entry.wind.speed;
+    dailyData[day].humidity += entry.main.humidity;
+
     if (!dailyData[day].description) {
       dailyData[day].description = entry.weather[0].description;
       dailyData[day].icon = entry.weather[0].icon;
@@ -60,7 +65,17 @@ const processWeatherData = (data) => {
     .map(
       ([
         day,
-        { tempSum, count, minTemp, maxTemp, description, icon, feelsLike },
+        {
+          tempSum,
+          count,
+          minTemp,
+          maxTemp,
+          description,
+          icon,
+          feelsLike,
+          windSpeed,
+          humidity,
+        },
       ]) => ({
         day,
         avgTemp: (tempSum / count).toFixed(1),
@@ -69,52 +84,37 @@ const processWeatherData = (data) => {
         feelsLike: (feelsLike / count).toFixed(1),
         description,
         icon,
+        avgWindSpeed: (windSpeed / count).toFixed(1),
+        avgHumidity: (humidity / count).toFixed(1),
       })
     );
 };
 
-const Geocode = () => {
-  const [city, setCity] = useState("Tbilisi");
+const Weather = () => {
+  const { city } = useParams();
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["weather", city],
     queryFn: fetchWeather,
   });
 
   if (isLoading) return <p>იტვირთება...</p>;
-  if (error) return <p>შეცდომა ამინდის მონაცემების გაწვდენაში.</p>;
+  if (error) return <p>შეცდომა: {error.message}</p>;
 
   const dailyForecast = processWeatherData(data);
 
   return (
     <div>
-      <select value={city} onChange={(e) => setCity(e.target.value)}>
-        <option value="Tbilisi">თბილისი</option>
-        <option value="Batumi">ბათუმი</option>
-        <option value="Kutaisi">ქუთაისი</option>
-        <option value="Zugdidi">ზუგდიდი</option>
-        <option value="Rustavi">რუსთავი</option>
-        <option value="Vani">ვანი</option>
-        <option value="Telavi">თელავი</option>
-        <option value="Mtskheta">მცხეთა</option>
-        <option value="Gori">გორი</option>
-        <option value="Khashuri">ხაშური</option>
-        <option value="Sighnaghi">სიღნაღი</option>
-        <option value="Mestia">მესტია</option>
-        <option value="Borjomi">ბორჯომი</option>
-        <option value="Poti">ფოთი</option>
-        <option value="Akhaltsikhe">ახალციხე</option>
-        <option value="Ambrolauri">ამბროლაური</option>
-        <option value="Kobuleti">ქობულეთი</option>
-        <option value="Zestafoni">ზესტაფონი</option>
-      </select>
-      <div className="flex flex-wrap items-center">
-        <h2>{data.city.name} - ამინდის პროგნოზი</h2>
+      <h2>{data.city.name} - 5 დღის ამინდის პროგნოზი</h2>
+
+      <div className="flex flex-wrap items-center gap-4">
         {dailyForecast.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col bg-white rounded p-4 w-full max-w-[300px] shadow-lg mb-6"
+            className="flex flex-col m-auto bg-white rounded p-4 max-w-[300px] shadow-lg mb-6 "
           >
             <div className="font-bold text-xl">{item.day}</div>
+
             <div className="text-sm text-gray-500">
               {new Date().toLocaleDateString("ka-GE", {
                 weekday: "long",
@@ -131,6 +131,7 @@ const Geocode = () => {
                 })}
               </div>
             </div>
+
             <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-fit">
               <img
                 className="w-40"
@@ -138,12 +139,14 @@ const Geocode = () => {
                 alt={item.description}
               />
             </div>
+
             <div className="flex flex-row items-center justify-center mt-6">
               <div className="font-medium text-6xl">{item.avgTemp}°C</div>
               <div className="flex flex-col items-center ml-6">
                 <div>{item.description}</div>
               </div>
             </div>
+
             <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
               <div className="flex flex-col items-center">
                 <div className="font-medium">მინ.</div>
@@ -154,6 +157,21 @@ const Geocode = () => {
                 <div>{item.maxTemp}°C</div>
               </div>
             </div>
+
+            <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
+              <div className="flex flex-col items-center">
+                <div className="font-medium">იგრძნობა როგორც</div>
+                <div>{item.feelsLike}°C</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="font-medium">ქარი</div>
+                <div>{item.avgWindSpeed} km/h</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="font-medium">ტენიანობა</div>
+                <div>{item.avgHumidity}%</div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -161,4 +179,4 @@ const Geocode = () => {
   );
 };
 
-export default Geocode;
+export default Weather;

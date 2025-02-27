@@ -10,8 +10,15 @@ import MainLayout from "./components/MainLayout.jsx";
 import History from "./pages/History.jsx";
 import DailyTemp from "./pages/DailyTemp.jsx";
 import Forecast from "./pages/Forecast.jsx";
+import Geocodetest from "./components/Geocodetest.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -21,7 +28,9 @@ createRoot(document.getElementById("root")).render(
           <Route element={<MainLayout />}>
             <Route path="/" element={<CurrentWeather />} />
             <Route path="/geocode" element={<Geocode />} />
-            <Route path="/forecast" element={<Forecast />} />
+            <Route path="/geocodetest" element={<Geocodetest />} />
+
+            <Route path="/forecast/:city" element={<Forecast />} />
             <Route path="/history" element={<History />} />
             <Route path="/detailed-history" element={<DailyTemp />} />
           </Route>

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { Link } from "react-router";
+import ChooseLocation from "../components/ChooseLocation";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
-  { name: "მატანი", lat: "42.07", lon: "45.20" },
-  { name: "თბილისი", lat: "41.6941", lon: "44.8337" },
+  { name: "Akhmeta", lat: "42.07", lon: "45.20" },
+  { name: "Tbilisi", lat: "41.6941", lon: "44.8337" },
 ];
 
 const CurrentWeather = () => {
@@ -37,6 +38,8 @@ const CurrentWeather = () => {
         setError(error.message);
       }
     };
+
+    console.log(weatherData.weather);
 
     fetchWeatherData();
   }, []);
@@ -86,6 +89,14 @@ const CurrentWeather = () => {
             </div>
 
             <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
+              <div className="flex flex-col items-center"></div>
+              <div className="flex flex-col items-center">
+                <div className="font-medium">იგრძნობა როგორც</div>
+                <div>{weather.main.feels_like.toFixed(1)}°C</div>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
               <div className="flex flex-col items-center">
                 <div className="font-medium">ქარი</div>
                 <div>{weather.wind.speed} km/h</div>
@@ -100,7 +111,7 @@ const CurrentWeather = () => {
               </div>
             </div>
             <Link
-              to="/forecast"
+              to={`/forecast/${weather.city}`}
               type="button"
               className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
@@ -111,6 +122,8 @@ const CurrentWeather = () => {
       ) : (
         <WeatherLoader />
       )}
+
+      <ChooseLocation />
     </div>
   );
 };
