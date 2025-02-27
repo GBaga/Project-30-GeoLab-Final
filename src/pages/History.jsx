@@ -1,90 +1,114 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Papa from "papaparse";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
+import { useQuery } from "@tanstack/react-query";
+
+// Helper function to parse weather data
+const parseWeatherData = (csvData) => {
+  return new Promise((resolve, reject) => {
+    Papa.parse(csvData, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+        const formattedData = {};
+
+        result.data.forEach(({ dt_iso, temp }) => {
+          if (!dt_iso || !temp) return;
+
+          const [year, month] = dt_iso.split(" ")[0].split("-");
+
+          if (!formattedData[year]) formattedData[year] = {};
+          if (!formattedData[year][month])
+            formattedData[year][month] = { total: 0, count: 0 };
+
+          formattedData[year][month].total += parseFloat(temp);
+          formattedData[year][month].count += 1;
+        });
+
+        // Compute the averages
+        Object.keys(formattedData).forEach((year) => {
+          Object.keys(formattedData[year]).forEach((month) => {
+            formattedData[year][month] =
+              formattedData[year][month].total /
+              formattedData[year][month].count;
+          });
+        });
+
+        resolve(formattedData);
+      },
+      error: (err) => reject(err),
+    });
+  });
+};
+
+// Fetch function for weather data
+const fetchWeatherData = async () => {
+  const response = await axios.get("/assets/weather.csv");
+  return parseWeatherData(response.data);
+};
 
 const History = () => {
-  const [weatherData, setWeatherData] = useState({});
-  const [loading, setLoading] = useState(true); // Loading state
+  const {
+    data: weatherData,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["weatherData"],
+    queryFn: fetchWeatherData,
+  });
 
-  useEffect(() => {
-    axios
-      .get("/assets/weather.csv") // Make sure this file is in `public/`
-      .then((response) => {
-        Papa.parse(response.data, {
-          header: true,
-          skipEmptyLines: true,
-          complete: (result) => {
-            const formattedData = {};
-
-            result.data.forEach(({ dt_iso, temp }) => {
-              if (!dt_iso || !temp) return;
-
-              const [year, month] = dt_iso.split(" ")[0].split("-");
-
-              if (!formattedData[year]) formattedData[year] = {};
-              if (!formattedData[year][month])
-                formattedData[year][month] = { total: 0, count: 0 };
-
-              formattedData[year][month].total += parseFloat(temp);
-              formattedData[year][month].count += 1;
-            });
-
-            // Compute the averages
-            Object.keys(formattedData).forEach((year) => {
-              Object.keys(formattedData[year]).forEach((month) => {
-                formattedData[year][month] =
-                  formattedData[year][month].total /
-                  formattedData[year][month].count;
-              });
-            });
-
-            console.log("Formatted Weather Data:", formattedData);
-            setWeatherData(formattedData);
-            setLoading(false); // Set loading to false after data is processed
-          },
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching CSV:", error);
-        setLoading(false); // Set loading to false in case of error
-      });
-  }, []);
-
-  const months = [
-    { key: "01", label: "იან" },
-    { key: "02", label: "თებ" },
-    { key: "03", label: "მარ" },
-    { key: "04", label: "აპრ" },
-    { key: "05", label: "მაის" },
-    { key: "06", label: "ივნ" },
-    { key: "07", label: "ივლ" },
-    { key: "08", label: "აგვ" },
-    { key: "09", label: "სექტ" },
-    { key: "10", label: "ოქტ" },
-    { key: "11", label: "ნოემ" },
-    { key: "12", label: "დეკ" },
-  ];
-
-  const years = Array.from({ length: 2025 - 1979 + 1 }, (_, i) =>
-    (2025 - i).toString()
+  const months = useMemo(
+    () => [
+      { key: "01", label: "იან" },
+      { key: "02", label: "თებ" },
+      { key: "03", label: "მარ" },
+      { key: "04", label: "აპრ" },
+      { key: "05", label: "მაის" },
+      { key: "06", label: "ივნ" },
+      { key: "07", label: "ივლ" },
+      { key: "08", label: "აგვ" },
+      { key: "09", label: "სექტ" },
+      { key: "10", label: "ოქტ" },
+      { key: "11", label: "ნოემ" },
+      { key: "12", label: "დეკ" },
+    ],
+    []
   );
 
-  const getTemperatureColor = (currentTemp, previousTemp) => {
-    if (previousTemp === null) return "black"; // No previous temperature to compare
-    const change = currentTemp - previousTemp;
-    if (change > 0) {
-      const redIntensity = Math.min(255, 255 * (change / 10)); // Adjust the red intensity based on change
-      return `rgb(${redIntensity}, 0, 0)`; // More red for rising temperature
-    } else if (change < 0) {
-      const blueIntensity = Math.min(255, 255 * (-change / 10)); // Adjust the blue intensity based on change
-      return `rgb(0, 0, ${blueIntensity})`; // More blue for decreasing temperature
-    }
-    return "black"; // No change
-  };
+  const years = useMemo(
+    () =>
+      Array.from({ length: 2025 - 1979 + 1 }, (_, i) => (2025 - i).toString()),
+    []
+  );
 
-  if (loading) {
+  const getTemperatureColor = useMemo(
+    () => (currentTemp, previousTemp) => {
+      if (previousTemp === null) return "black";
+      const change = currentTemp - previousTemp;
+      if (change > 0) {
+        const redIntensity = Math.min(255, 255 * (change / 10));
+        return `rgb(${redIntensity}, 0, 0)`;
+      } else if (change < 0) {
+        const blueIntensity = Math.min(255, 255 * (-change / 10));
+        return `rgb(0, 0, ${blueIntensity})`;
+      }
+      return "black";
+    },
+    []
+  );
+
+  // Conditional rendering based on loading and error state
+  if (isLoading) {
     return <WeatherLoader />;
+  }
+
+  if (isError) {
+    return <div>Failed to load weather data. Please try again later.</div>;
+  }
+
+  if (!weatherData) {
+    return <div>No weather data available</div>;
   }
 
   return (
@@ -109,7 +133,7 @@ const History = () => {
           </thead>
           <tbody>
             {years.map((year) => {
-              let previousMonthTemp = null; // To track the previous month for each year
+              let previousMonthTemp = null;
               return (
                 <tr key={year}>
                   <td className="border border-gray-400 p-2 font-bold">
@@ -122,7 +146,7 @@ const History = () => {
                       previousMonthTemp
                     );
 
-                    previousMonthTemp = currentMonthTemp; // Update for next comparison
+                    previousMonthTemp = currentMonthTemp;
 
                     return (
                       <td

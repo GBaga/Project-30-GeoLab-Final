@@ -2,6 +2,7 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 
@@ -93,7 +94,7 @@ const Weather = () => {
     enabled: !!city,
   });
 
-  if (isLoading) return <p>იტვირთება...</p>;
+  if (isLoading) return <WeatherLoader />;
   if (error) return <p>შეცდომა: {error.message}</p>;
   if (!data || !data.city) return <p>მონაცემები ვერ მოიძებნა.</p>;
 

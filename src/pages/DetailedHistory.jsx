@@ -3,7 +3,7 @@ import axios from "axios";
 import Papa from "papaparse";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 
-const DailyTemp = () => {
+const DetailedHistory = () => {
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -289,4 +289,4 @@ const DailyTemp = () => {
   );
 };
 
-export default DailyTemp;
+export default DetailedHistory;

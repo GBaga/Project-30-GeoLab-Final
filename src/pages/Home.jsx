@@ -10,7 +10,7 @@ const locations = [
   { name: "Tbilisi", lat: "41.6941", lon: "44.8337" },
 ];
 
-const CurrentWeather = () => {
+const Home = () => {
   const [weatherData, setWeatherData] = useState([]);
   const [error, setError] = useState(null);
 
@@ -38,8 +38,6 @@ const CurrentWeather = () => {
         setError(error.message);
       }
     };
-
-    console.log(weatherData.weather);
 
     fetchWeatherData();
   }, []);
@@ -128,4 +126,4 @@ const CurrentWeather = () => {
   );
 };
 
-export default CurrentWeather;
+export default Home;
