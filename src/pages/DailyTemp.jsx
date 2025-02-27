@@ -6,7 +6,7 @@ import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 const DailyTemp = () => {
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [selectedYear, setSelectedYear] = useState("2025");
+  const [selectedYear, setSelectedYear] = useState("2024");
   const [expandedMonth, setExpandedMonth] = useState(null);
 
   useEffect(() => {
@@ -140,7 +140,7 @@ const DailyTemp = () => {
         </select>
 
         <h3 className="inline ml-5 italic text-sm">
-          მონაცემებზე დაკლიკებით გაიხსნება საათობრივი ჩანაწერებით თვის თითოეულ
+          მონაცემებზე დაკლიკებით გაიხსნება საათობრივი ჩანაწერები თვის თითოეულ
           დღეზე.
         </h3>
       </div>
@@ -194,7 +194,7 @@ const DailyTemp = () => {
                       return (
                         <td
                           key={day}
-                          className="border border-gray-400 p-2"
+                          className="border border-gray-400 p-2 text-center"
                           style={{
                             width: "72px",
                             color: getTemperatureColor(change), // Dynamic color based on temperature change
@@ -202,7 +202,7 @@ const DailyTemp = () => {
                         >
                           {dayData?.average
                             ? `${dayData.average.toFixed(1)}°C`
-                            : "-"}
+                            : "x"}
                         </td>
                       );
                     })}
@@ -253,7 +253,7 @@ const DailyTemp = () => {
                                   return (
                                     <td
                                       key={day}
-                                      className={`border border-gray-400 p-2 ${
+                                      className={`border border-gray-400 p-2 text-center ${
                                         dayIndex % 2 === 0 ? "bg-gray-100" : ""
                                       }`}
                                       style={{
@@ -268,7 +268,7 @@ const DailyTemp = () => {
                                               0
                                             ) / hourData.length
                                           ).toFixed(1)}°C`
-                                        : "-"}
+                                        : "x"}
                                     </td>
                                   );
                                 })}
