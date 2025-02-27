@@ -127,12 +127,14 @@ const History = () => {
                     return (
                       <td
                         key={key}
-                        className="border border-gray-400 p-2"
+                        className="border border-gray-400 p-2 text-center"
                         style={{
                           color: currentMonthTemp ? color : "black",
                         }}
                       >
-                        {currentMonthTemp ? currentMonthTemp.toFixed(1) : "-"}
+                        {currentMonthTemp
+                          ? `${currentMonthTemp.toFixed(1)}°C`
+                          : "-"}
                       </td>
                     );
                   })}

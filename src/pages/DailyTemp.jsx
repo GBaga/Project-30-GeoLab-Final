@@ -200,7 +200,9 @@ const DailyTemp = () => {
                             color: getTemperatureColor(change), // Dynamic color based on temperature change
                           }}
                         >
-                          {dayData?.average ? dayData.average.toFixed(1) : "-"}
+                          {dayData?.average
+                            ? `${dayData.average.toFixed(1)}°C`
+                            : "-"}
                         </td>
                       );
                     })}
@@ -259,13 +261,13 @@ const DailyTemp = () => {
                                         color: getTemperatureColor(change), // Dynamic color for hour data
                                       }}
                                     >
-                                      {hourData
-                                        ? (
+                                      {hourData && hourData.length > 0
+                                        ? `${(
                                             hourData.reduce(
                                               (a, b) => a + b,
                                               0
                                             ) / hourData.length
-                                          ).toFixed(1)
+                                          ).toFixed(1)}°C`
                                         : "-"}
                                     </td>
                                   );
