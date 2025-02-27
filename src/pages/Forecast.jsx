@@ -63,14 +63,16 @@ function Forecast() {
         <h3>ადგილი: {weatherData?.city?.name || "მიუწვდომელია"}</h3>
       </div>
 
-      <button
-        onClick={() => setShowTable(!showTable)}
-        className="mb-4 px-6 py-2 bg-blue-500 text-white font-bold rounded w-full"
-      >
-        {showTable
-          ? "დამალე საათობრივი პროგნოზი"
-          : "მაჩვენე საათობრივი პროგნოზი"}
-      </button>
+      <div className="flex justify-center p-6  md:px-0">
+        <button
+          onClick={() => setShowTable(!showTable)}
+          className="px-6 py-2 bg-blue-500 text-white font-bold rounded  w-full "
+        >
+          {showTable
+            ? "დამალე საათობრივი პროგნოზი"
+            : "მაჩვენე საათობრივი პროგნოზი"}
+        </button>
+      </div>
 
       {showTable && (
         <table className="w-full mt-4 border-collapse border border-gray-300">

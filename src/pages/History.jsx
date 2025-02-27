@@ -134,7 +134,7 @@ const History = () => {
                       >
                         {currentMonthTemp
                           ? `${currentMonthTemp.toFixed(1)}°C`
-                          : "-"}
+                          : "x"}
                       </td>
                     );
                   })}
