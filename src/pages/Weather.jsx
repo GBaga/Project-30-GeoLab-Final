@@ -165,7 +165,7 @@ const Weather = () => {
               </div>
             </div>
 
-            <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
+            <div className="flex flex-row justify-between mt-6 text-sm text-center text-gray-500">
               <div className="flex flex-col items-center">
                 <div className="font-medium">იგრძნობა როგორც</div>
                 <div>{item.feelsLike}°C</div>

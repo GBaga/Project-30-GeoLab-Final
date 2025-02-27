@@ -6,7 +6,7 @@ import Weather from "./Weather";
 
 function Forecast() {
   const { city } = useParams(); // Get city from URL
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showTable, setShowTable] = useState(false);
@@ -58,7 +58,6 @@ function Forecast() {
 
   return (
     <div>
-      <Weather />
       <div className="pt-10 px-10">
         <h2>მომდევნო დღეების პროგნოზი</h2>
         <h3>ადგილი: {weatherData?.city?.name || "მიუწვდომელია"}</h3>
@@ -127,6 +126,7 @@ function Forecast() {
           </tbody>
         </table>
       )}
+      <Weather />
     </div>
   );
 }
