@@ -124,12 +124,13 @@ const DailyTemp = () => {
       <h2 className="text-xl font-bold mb-4">
         მატნის საშუალო დღიური ტემპერატურა ({selectedYear}) (°C)
       </h2>
+      <h3 className="mb-3">ამინდის ისტორიული მონაცემები 1979-2025 წლებში.</h3>
       <div className="mb-4">
-        <label className="mr-2">აირჩიეთ წელი:</label>
+        <label className="mr-2 font-bold ">აირჩიეთ წელი:</label>
         <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
-          className="border p-2"
+          className="border p-2 bg-yellow-100"
         >
           {years.map((year) => (
             <option key={year} value={year}>
@@ -137,6 +138,11 @@ const DailyTemp = () => {
             </option>
           ))}
         </select>
+
+        <h3 className="inline ml-5 italic text-sm">
+          მონაცემებზე დაკლიკებით გაიხსნება საათობრივი ჩანაწერებით თვის თითოეულ
+          დღეზე.
+        </h3>
       </div>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-400 w-full text-sm">

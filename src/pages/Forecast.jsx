@@ -60,7 +60,7 @@ function Forecast() {
     <div>
       <Weather />
       <div className="pt-10 px-10">
-        <h2>5 დღის დეტალური პროგნოზი</h2>
+        <h2>მომდევნო დღეების პროგნოზი</h2>
         <h3>ადგილი: {weatherData?.city?.name || "მიუწვდომელია"}</h3>
       </div>
 

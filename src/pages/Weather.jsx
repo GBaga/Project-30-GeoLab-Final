@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
@@ -61,7 +62,7 @@ const processWeatherData = (data) => {
   });
 
   return Object.entries(dailyData)
-    .slice(0, 5)
+    .slice(0, 6)
     .map(
       ([
         day,
@@ -92,10 +93,16 @@ const processWeatherData = (data) => {
 
 const Weather = () => {
   const { city } = useParams();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries(["weather", city]);
+  }, [city, queryClient]);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["weather", city],
     queryFn: fetchWeather,
+    enabled: !!city, // Prevents query from running when city is undefined
   });
 
   if (isLoading) return <p>იტვირთება...</p>;
@@ -105,7 +112,7 @@ const Weather = () => {
 
   return (
     <div>
-      <h2>{data.city.name} - 5 დღის ამინდის პროგნოზი</h2>
+      <h2>{data.city.name} - პროგნოზი</h2>
 
       <div className="flex flex-wrap items-center gap-4">
         {dailyForecast.map((item, index) => (
