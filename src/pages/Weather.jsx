@@ -102,7 +102,10 @@ const Weather = () => {
 
   return (
     <div>
-      <h2>{data.city.name} - პროგნოზი</h2>
+      <h2>
+        {data.city.name === "Meria" ? "Tbilisi" : data.city.name} - პროგნოზი
+      </h2>
+
       <div className="flex flex-wrap items-center gap-4">
         {dailyForecast.map((item, index) => (
           <div

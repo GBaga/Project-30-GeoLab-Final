@@ -75,7 +75,7 @@ function Forecast() {
       </div>
 
       {showTable && (
-        <table className="w-full mt-4 border-collapse border border-gray-300">
+        <table className="w-full my-4 border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-200">
               <th className="border border-gray-300 p-2">თარიღი</th>
@@ -100,20 +100,28 @@ function Forecast() {
                         hourCycle: "h23",
                       }
                     );
-                    return <p key={item.dt}>{time}</p>;
+                    return (
+                      <p className="text-center mb-4 border-b-2" key={item.dt}>
+                        {time}
+                      </p>
+                    );
                   })}
                 </td>
-                <td className="border border-gray-300 p-2">
+                <td className="border border-gray-300 p-2 text-center ">
                   {forecasts.map((item) => (
-                    <p key={item.dt}>{item.main.temp.toFixed(1)} °C</p>
+                    <p className="mb-4 border-b-2" key={item.dt}>
+                      {item.main.temp.toFixed(1)} °C
+                    </p>
                   ))}
                 </td>
-                <td className="border border-gray-300 p-2">
+                <td className="border border-gray-300 p-2 text-center">
                   {forecasts.map((item) => (
-                    <p key={item.dt}>{item.weather[0].main}</p>
+                    <p className="mb-4 border-b-2" key={item.dt}>
+                      {item.weather[0].main}
+                    </p>
                   ))}
                 </td>
-                <td className="border border-gray-300 p-2">
+                <td className="border border-gray-300 p-2 text-center mb-4">
                   {forecasts.map((item) => (
                     <img
                       key={item.dt}
