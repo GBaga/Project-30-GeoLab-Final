@@ -77,6 +77,29 @@ const ChooseLocation = () => {
         </div>
       </div>
 
+      <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
+        <div className="flex flex-col items-center"></div>
+        <div className="flex flex-col items-center">
+          <div className="font-medium">იგრძნობა როგორც</div>
+          <div>{data.main.feels_like.toFixed(1)}°C</div>
+        </div>
+      </div>
+
+      <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
+        <div className="flex flex-col items-center">
+          <div className="font-medium">ქარი</div>
+          <div>{data.wind.speed} km/h</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="font-medium">ტენიანობა</div>
+          <div>{data.main.humidity}%</div>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="font-medium">ხილვადობა</div>
+          <div>{(data.visibility / 1000).toFixed(1)} km</div>
+        </div>
+      </div>
+
       <Link
         to={`/forecast/${encodeURIComponent(city)}`}
         className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-6"
