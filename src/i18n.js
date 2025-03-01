@@ -16,7 +16,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    supportedLngs: ["en", "ka"],
+    supportedLngs: ["ka", "en"],
   });
 
 export default i18n;

@@ -63,7 +63,7 @@ const ChooseLocation = () => {
       <h2 className=" mb-2 text-xl text-center">{t("choose-city")}</h2>
 
       <select
-        className="font-bold text-xl bg-yellow-300 py-2"
+        className="font-bold text-xl bg-slate-100 py-2"
         value={city}
         onChange={(e) => setCity(e.target.value)}
       >

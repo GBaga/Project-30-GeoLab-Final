@@ -115,7 +115,9 @@ const History = () => {
 
   return (
     <div className="w-full p-4">
-      <h2 className="text-xl font-bold mb-4">{t("matani-monthly-temp")}(°C)</h2>
+      <h2 className="text-xl font-bold mb-4">
+        {t("matani-monthly-temp")} (°C)
+      </h2>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-400 w-full text-sm">
           <thead>

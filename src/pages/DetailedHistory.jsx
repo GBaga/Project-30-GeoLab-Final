@@ -112,7 +112,7 @@ const DetailedHistory = () => {
   return (
     <div className="w-full p-4">
       <h2 className="text-xl font-bold mb-4">
-        {t("matani-daily-temp")} ({selectedYear}) (°C)
+        {t("matani-daily-temp")} {selectedYear} (°C)
       </h2>
       <h3 className="mb-3">{t("historical-data")}</h3>
       <div className="mb-4">
