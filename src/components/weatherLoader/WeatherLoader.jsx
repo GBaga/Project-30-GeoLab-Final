@@ -1,6 +1,9 @@
-import "./weatherLoader.css"; // Import the CSS for keyframes
+import "./weatherLoader.css";
+import { useTranslation } from "react-i18next";
 
 const WeatherLoader = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full ">
       <div className="container mx-auto w-[250px] h-[250px] p-[15px] flex items-center justify-center ">
@@ -15,7 +18,7 @@ const WeatherLoader = () => {
           <span className="right-back"></span>
         </div>
       </div>
-      <h2 className="text-center font-bold">იტვირთება . . .</h2>
+      <h2 className="text-center font-bold">{t("loader")}</h2>
     </div>
   );
 };

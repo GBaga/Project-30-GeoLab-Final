@@ -3,6 +3,7 @@ import axios from "axios";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { Link } from "react-router";
 import ChooseLocation from "../components/ChooseLocation";
+import { useTranslation } from "react-i18next";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
@@ -13,6 +14,8 @@ const locations = [
 const Home = () => {
   const [weatherData, setWeatherData] = useState([]);
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -89,22 +92,24 @@ const Home = () => {
             <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
               <div className="flex flex-col items-center"></div>
               <div className="flex flex-col items-center">
-                <div className="font-medium">იგრძნობა როგორც</div>
+                <div className="font-medium">{t("feels-lie")}</div>
                 <div>{weather.main.feels_like.toFixed(1)}°C</div>
               </div>
             </div>
 
             <div className="flex flex-row justify-between mt-6 text-sm text-gray-500">
               <div className="flex flex-col items-center">
-                <div className="font-medium">ქარი</div>
-                <div>{weather.wind.speed} km/h</div>
+                <div className="font-medium">{t("wind")}</div>
+                <div>
+                  {weather.wind.speed} {t("km/h")}
+                </div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-medium">ტენიანობა</div>
+                <div className="font-medium">{t("humidity")}</div>
                 <div>{weather.main.humidity}%</div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-medium">ხილვადობა</div>
+                <div className="font-medium">{t("visibility")}</div>
                 <div>{(weather.visibility / 1000).toFixed(1)} km</div>
               </div>
             </div>
@@ -113,7 +118,7 @@ const Home = () => {
               type="button"
               className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              მომდევნო დღეების პროგნოზი
+              {t("forecast-next-days")}
             </Link>
           </div>
         ))

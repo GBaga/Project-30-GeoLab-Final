@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html {
-  font-family: "Noto Sans Georgian", serif;
+  font-family: "Noto Sans Georgian", "Noto Color Emoji", serif;
 }

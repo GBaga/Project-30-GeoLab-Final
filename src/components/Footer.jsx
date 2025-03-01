@@ -1,7 +1,10 @@
 import SocialNetworks from "./SocialNetworks";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl">
@@ -16,7 +19,7 @@ function Footer() {
               rel="noopener noreferrer"
               className="text-sm text-gray-500 dark:text-gray-300 sm:text-center md:order-first"
             >
-              © 2025 GBaga. ყველა უფლება დაცულია
+              © 2025 GBaga. {t("copy-right")}
             </Link>
           </div>
         </div>

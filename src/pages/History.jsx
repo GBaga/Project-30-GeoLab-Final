@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import axios from "axios";
 import Papa from "papaparse";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 // Helper function to parse weather data
 const parseWeatherData = (csvData) => {
@@ -49,6 +50,8 @@ const fetchWeatherData = async () => {
 };
 
 const History = () => {
+  const { t } = useTranslation();
+
   const {
     data: weatherData,
     isLoading,
@@ -58,23 +61,22 @@ const History = () => {
     queryFn: fetchWeatherData,
   });
 
-  const months = useMemo(
-    () => [
-      { key: "01", label: "იან" },
-      { key: "02", label: "თებ" },
-      { key: "03", label: "მარ" },
-      { key: "04", label: "აპრ" },
-      { key: "05", label: "მაის" },
-      { key: "06", label: "ივნ" },
-      { key: "07", label: "ივლ" },
-      { key: "08", label: "აგვ" },
-      { key: "09", label: "სექტ" },
-      { key: "10", label: "ოქტ" },
-      { key: "11", label: "ნოემ" },
-      { key: "12", label: "დეკ" },
-    ],
-    []
-  );
+  const months = useMemo(() => {
+    return [
+      { key: "01", label: t("months.0") },
+      { key: "02", label: t("months.1") },
+      { key: "03", label: t("months.2") },
+      { key: "04", label: t("months.3") },
+      { key: "05", label: t("months.4") },
+      { key: "06", label: t("months.5") },
+      { key: "07", label: t("months.6") },
+      { key: "08", label: t("months.7") },
+      { key: "09", label: t("months.8") },
+      { key: "10", label: t("months.9") },
+      { key: "11", label: t("months.10") },
+      { key: "12", label: t("months.11") },
+    ];
+  }, [t]);
 
   const years = useMemo(
     () =>
@@ -104,23 +106,23 @@ const History = () => {
   }
 
   if (isError) {
-    return <div>Failed to load weather data. Please try again later.</div>;
+    return <div>{t("failed-load")}</div>;
   }
 
   if (!weatherData) {
-    return <div>No weather data available</div>;
+    return <div>{t("no-weather-data")}</div>;
   }
 
   return (
     <div className="w-full p-4">
-      <h2 className="text-xl font-bold mb-4">
-        მატნის საშუალო თვიური ტემპერატურა წლების მიხედვით (°C)
-      </h2>
+      <h2 className="text-xl font-bold mb-4">{t("matani-monthly-temp")}(°C)</h2>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-400 w-full text-sm">
           <thead>
             <tr>
-              <th className="border border-gray-400 p-2 bg-gray-200">წელი</th>
+              <th className="border border-gray-400 p-2 bg-gray-200">
+                {t("year")}
+              </th>
               {months.map(({ key, label }) => (
                 <th
                   key={key}

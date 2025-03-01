@@ -1,0 +1,88 @@
+{
+  "weather": "WEATHER",
+  "nav-home": "Home",
+  "nav-monthly-history": "Monthly History",
+  "nav-detailed-history": "Detailed History",
+
+  "loader": "Loading...",
+  "error": "Error",
+  "incomplete-data": "Weather data is incomplete",
+  "choose-city": "Choose City",
+  "Tbilisi": "Tbilisi",
+  "Batumi": "Batumi",
+  "Kutaisi": "Kutaisi",
+  "Zugdidi": "Zugdidi",
+  "Rustavi": "Rustavi",
+  "Vani": "Vani",
+  "Telavi": "Telavi",
+  "Mtskheta": "Mtskheta",
+  "Gori": "Gori",
+  "Khashuri": "Khashuri",
+  "Sighnaghi": "Sighnaghi",
+  "Mestia": "Mestia",
+  "Borjomi": "Borjomi",
+  "Poti": "Poti",
+  "Akhaltsikhe": "Akhaltsikhe",
+  "Ambrolauri": "Ambrolauri",
+  "Kobuleti": "Kobuleti",
+  "Zestafoni": "Zestafoni",
+
+  "feels-like": "Feels Like",
+  "wind": "Wind",
+  "humidity": "Humidity",
+  "visibility": "Visibility",
+  "km": "km",
+
+  "forecast-next-days": "Next Days Forecast",
+
+  "copy-right": "All rights reserved.",
+
+  "H1": "Weather Forecast",
+
+  "source": "Source",
+
+  "months": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ],
+
+  "matani-daily-temp": "Average Daily Temperature of Matani",
+  "matani-monthly-temp": "Average Monthly Temperature of Matani by Year",
+
+  "historical-data": "Historical Weather Data of Matani from 1979 to 2025.",
+
+  "choose-year": "Choose Year:",
+
+  "click-on-data": "Click on the data to view hourly records for each day of the month.",
+
+  "month": "Month",
+
+  "hour": "Hour",
+  "year": "Year",
+  "location": "Location",
+  "unreachable": "Unreachable.",
+  "no-weather-data": "Weather data is not available",
+  "no-data-found": "No data found.",
+
+  "hide-forecast": "Hide Hourly Forecast",
+  "show-forecast": "Show Hourly Forecast",
+  "date": "Date",
+  "time": "Time",
+  "temp": "Temp.",
+  "failed-load": "Failed to load weather data. Please try again later.",
+  "km/h": "km/h",
+  "no-city": "City not found.",
+  "min": "Min.",
+  "max": "Max.",
+  "icon": "Icon"
+}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import Weather from "./Weather";
+import { useTranslation } from "react-i18next";
 
 function Forecast() {
   const { city } = useParams(); // Get city from URL
@@ -12,6 +13,8 @@ function Forecast() {
   const [showTable, setShowTable] = useState(false);
 
   const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!city) {
@@ -38,7 +41,12 @@ function Forecast() {
   }, [city]);
 
   if (loading) return <WeatherLoader />;
-  if (error) return <p>Error: {error}</p>;
+  if (error)
+    return (
+      <p>
+        {t("error")}: {error}
+      </p>
+    );
 
   // Group forecasts by day
   const groupedByDay = weatherData.list.reduce((acc, item) => {
@@ -59,8 +67,10 @@ function Forecast() {
   return (
     <div>
       <div className="pt-10 px-10">
-        <h2>მომდევნო დღეების პროგნოზი</h2>
-        <h3>ადგილი: {weatherData?.city?.name || "მიუწვდომელია"}</h3>
+        <h2>{t("forecast-next-days")}</h2>
+        <h3>
+          {t("location")}: {weatherData?.city?.name || t("unreachable")}
+        </h3>
       </div>
 
       <div className="flex justify-center p-6  md:px-0">
@@ -68,9 +78,7 @@ function Forecast() {
           onClick={() => setShowTable(!showTable)}
           className="px-6 py-2 bg-blue-500 text-white font-bold rounded  w-full "
         >
-          {showTable
-            ? "დამალე საათობრივი პროგნოზი"
-            : "მაჩვენე საათობრივი პროგნოზი"}
+          {showTable ? t("hide-forecast") : t("show-forecast")}
         </button>
       </div>
 
@@ -78,11 +86,11 @@ function Forecast() {
         <table className="w-full my-4 border-collapse border border-gray-300">
           <thead>
             <tr className="bg-gray-200">
-              <th className="border border-gray-300 p-2">თარიღი</th>
-              <th className="border border-gray-300 p-2">დრო</th>
-              <th className="border border-gray-300 p-2">ტემპ. (°C)</th>
-              <th className="border border-gray-300 p-2">ამინდი</th>
-              <th className="border border-gray-300 p-2">icon</th>
+              <th className="border border-gray-300 p-2">{t("date")}</th>
+              <th className="border border-gray-300 p-2">{t("time")}</th>
+              <th className="border border-gray-300 p-2">{t("temp")} (°C)</th>
+              <th className="border border-gray-300 p-2">{t("weather")}</th>
+              <th className="border border-gray-300 p-2">{t("icon")}</th>
             </tr>
           </thead>
           <tbody>

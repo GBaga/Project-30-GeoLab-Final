@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Papa from "papaparse";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
+import { useTranslation } from "react-i18next";
 
 const DetailedHistory = () => {
   const [weatherData, setWeatherData] = useState({});
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState("2024");
   const [expandedMonth, setExpandedMonth] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios
@@ -79,20 +82,7 @@ const DetailedHistory = () => {
       });
   }, []);
 
-  const months = [
-    "იან",
-    "თებ",
-    "მარ",
-    "აპრ",
-    "მაის",
-    "ივნ",
-    "ივლ",
-    "აგვ",
-    "სექტ",
-    "ოქტ",
-    "ნოემ",
-    "დეკ",
-  ];
+  const months = t("months", { returnObjects: true });
 
   const years = Array.from({ length: 2025 - 1979 + 1 }, (_, i) =>
     (2025 - i).toString()
@@ -122,11 +112,11 @@ const DetailedHistory = () => {
   return (
     <div className="w-full p-4">
       <h2 className="text-xl font-bold mb-4">
-        მატნის საშუალო დღიური ტემპერატურა ({selectedYear}) (°C)
+        {t("matani-daily-temp")} ({selectedYear}) (°C)
       </h2>
-      <h3 className="mb-3">ამინდის ისტორიული მონაცემები 1979-2025 წლებში.</h3>
+      <h3 className="mb-3">{t("historical-data")}</h3>
       <div className="mb-4">
-        <label className="mr-2 font-bold ">აირჩიეთ წელი:</label>
+        <label className="mr-2 font-bold ">{t("choose-year")}</label>
         <select
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}
@@ -139,10 +129,7 @@ const DetailedHistory = () => {
           ))}
         </select>
 
-        <h3 className="inline ml-5 italic text-sm">
-          მონაცემებზე დაკლიკებით გაიხსნება საათობრივი ჩანაწერები თვის თითოეულ
-          დღეზე.
-        </h3>
+        <h3 className="inline ml-5 italic text-sm">{t("click-on-data")}</h3>
       </div>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-400 w-full text-sm">
@@ -152,7 +139,7 @@ const DetailedHistory = () => {
                 className="border border-gray-400 p-2 bg-gray-200 block"
                 style={{ width: "72px" }}
               >
-                თვე
+                {t("month")}
               </th>
               {days.map((day) => (
                 <th
@@ -217,7 +204,7 @@ const DetailedHistory = () => {
                                 className="border border-gray-400 p-2 bg-gray-200 block"
                                 style={{ width: "72px" }}
                               >
-                                საათი
+                                {t("hour")}
                               </th>
                               {days.map((day) => (
                                 <th
