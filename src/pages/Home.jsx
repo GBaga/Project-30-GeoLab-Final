@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
 const locations = [
-  { name: "Akhmeta", lat: "42.07", lon: "45.20" },
+  { name: "Matani, GE", lat: "42.07", lon: "45.20" },
   { name: "Tbilisi", lat: "41.6941", lon: "44.8337" },
 ];
 
