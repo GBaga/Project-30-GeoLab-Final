@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { useTranslation } from "react-i18next";
 
-const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
+const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
 
 const Weather = () => {
   const { t } = useTranslation(); // Move inside the component

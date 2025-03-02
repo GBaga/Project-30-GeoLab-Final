@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import ChooseLocation from "../components/ChooseLocation";
 import { useTranslation } from "react-i18next";
 
-const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
+const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
 const locations = [
   { name: "Matani, GE", lat: "42.07", lon: "45.20" },
   { name: "Tbilisi", lat: "41.6941", lon: "44.8337" },

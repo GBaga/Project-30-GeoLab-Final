@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import WeatherLoader from "./weatherLoader/WeatherLoader";
 
-const API_KEY = "8d62b5015264a920a27dbd465a9a6273";
+const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
 
 const fetchCoordinates = async (city) => {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
