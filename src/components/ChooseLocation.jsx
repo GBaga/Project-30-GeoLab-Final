@@ -70,6 +70,7 @@ const ChooseLocation = () => {
         <option value="Tbilisi">{t("Tbilisi")}</option>
         <option value="Batumi">{t("Batumi")}</option>
         <option value="Kutaisi">{t("Kutaisi")}</option>
+        <option value="Tsesi">{t("Tsesi")}</option>
         <option value="Zugdidi">{t("Zugdidi")}</option>
         <option value="Rustavi">{t("Rustavi")}</option>
         <option value="Vani">{t("Vani")}</option>
