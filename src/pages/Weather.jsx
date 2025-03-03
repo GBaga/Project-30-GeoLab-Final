@@ -6,98 +6,87 @@ import WeatherLoader from "../components/weatherLoader/WeatherLoader";
 import { useTranslation } from "react-i18next";
 
 const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
+// const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
+const fetchWeather = async ({ queryKey }) => {
+  const [, city] = queryKey;
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`;
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || error.message);
+  }
+};
+
+const processWeatherData = (data) => {
+  if (!data || !data.list) return [];
+
+  const dailyData = {};
+  data.list.forEach((entry) => {
+    const date = new Date(entry.dt * 1000);
+    date.setHours(date.getHours() + 4);
+    const day = date.toISOString().split("T")[0];
+
+    if (!dailyData[day]) {
+      dailyData[day] = {
+        tempSum: 0,
+        count: 0,
+        minTemp: Infinity,
+        maxTemp: -Infinity,
+        description: "",
+        icon: "",
+        feelsLike: 0,
+        windSpeed: 0,
+        humidity: 0,
+      };
+    }
+
+    dailyData[day].tempSum += entry.main.temp;
+    dailyData[day].count++;
+    dailyData[day].minTemp = Math.min(
+      dailyData[day].minTemp,
+      entry.main.temp_min
+    );
+    dailyData[day].maxTemp = Math.max(
+      dailyData[day].maxTemp,
+      entry.main.temp_max
+    );
+    dailyData[day].feelsLike += entry.main.feels_like;
+    dailyData[day].windSpeed += entry.wind.speed;
+    dailyData[day].humidity += entry.main.humidity;
+
+    if (!dailyData[day].description) {
+      dailyData[day].description = entry.weather[0]?.description || "Unknown";
+      dailyData[day].icon = entry.weather[0]?.icon || "01d";
+    }
+  });
+
+  return Object.entries(dailyData)
+    .slice(0, 6)
+    .map(([day, values]) => ({
+      day,
+      avgTemp: (values.tempSum / values.count).toFixed(1),
+      minTemp: values.minTemp.toFixed(1),
+      maxTemp: values.maxTemp.toFixed(1),
+      feelsLike: (values.feelsLike / values.count).toFixed(1),
+      description: values.description,
+      icon: values.icon,
+      avgWindSpeed: (values.windSpeed / values.count).toFixed(1),
+      avgHumidity: (values.humidity / values.count).toFixed(1),
+    }));
+};
 
 const Weather = () => {
-  const { t } = useTranslation(); // Move inside the component
+  const { t } = useTranslation();
   const { city } = useParams();
   const queryClient = useQueryClient();
 
-  // Check if the city exists and handle invalid city
-  if (!city) {
-    return <p>{t("city-not-found")}</p>; // Provide translation for invalid city
-  }
+  if (!city) return <p>{t("city-not-found")}</p>;
 
   useEffect(() => {
     if (city) queryClient.invalidateQueries(["weather", city]);
   }, [city, queryClient]);
-
-  const fetchCoordinates = async (city) => {
-    try {
-      const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
-      const response = await axios.get(url);
-      if (!response.data || response.data.length === 0)
-        throw new Error(t("no-city"));
-      return response.data[0];
-    } catch (error) {
-      throw new Error(t("fetch-error")); // Translation for fetching error
-    }
-  };
-
-  const fetchWeather = async ({ queryKey }) => {
-    const [, city] = queryKey;
-    const { lat, lon } = await fetchCoordinates(city);
-    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-    const response = await axios.get(url);
-    return response.data;
-  };
-
-  const processWeatherData = (data) => {
-    if (!data || !data.list) return [];
-
-    const dailyData = {};
-    data.list.forEach((entry) => {
-      const date = new Date(entry.dt * 1000);
-      date.setHours(date.getHours() + 4);
-      const day = date.toISOString().split("T")[0];
-
-      if (!dailyData[day]) {
-        dailyData[day] = {
-          tempSum: 0,
-          count: 0,
-          minTemp: Infinity,
-          maxTemp: -Infinity,
-          description: "",
-          icon: "",
-          feelsLike: 0,
-          windSpeed: 0,
-          humidity: 0,
-        };
-      }
-
-      dailyData[day].tempSum += entry.main.temp;
-      dailyData[day].count++;
-      dailyData[day].minTemp = Math.min(
-        dailyData[day].minTemp,
-        entry.main.temp_min
-      );
-      dailyData[day].maxTemp = Math.max(
-        dailyData[day].maxTemp,
-        entry.main.temp_max
-      );
-      dailyData[day].feelsLike += entry.main.feels_like;
-      dailyData[day].windSpeed += entry.wind.speed;
-      dailyData[day].humidity += entry.main.humidity;
-
-      if (!dailyData[day].description) {
-        dailyData[day].description = entry.weather[0]?.description || "Unknown";
-        dailyData[day].icon = entry.weather[0]?.icon || "01d";
-      }
-    });
-
-    return Object.entries(dailyData)
-      .slice(0, 6)
-      .map(([day, values]) => ({
-        day,
-        avgTemp: (values.tempSum / values.count).toFixed(1),
-        minTemp: values.minTemp.toFixed(1),
-        maxTemp: values.maxTemp.toFixed(1),
-        feelsLike: (values.feelsLike / values.count).toFixed(1),
-        description: values.description,
-        icon: values.icon,
-        avgWindSpeed: (values.windSpeed / values.count).toFixed(1),
-        avgHumidity: (values.humidity / values.count).toFixed(1),
-      }));
-  };
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["weather", city],

@@ -25,6 +25,7 @@
     "next-env": "^1.1.1",
     "npx": "file:",
     "papaparse": "^5.5.2",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",

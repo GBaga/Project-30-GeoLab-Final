@@ -41,32 +41,29 @@ const DetailedHistory = () => {
                   total: 0,
                   count: 0,
                   hours: {},
-                  previousTemp: null, // Track previous temperature
+                  previousTemp: null,
                 };
               if (!formattedData[year][month][day].hours[hour])
                 formattedData[year][month][day].hours[hour] = [];
 
-              // Store hourly temperatures
               formattedData[year][month][day].hours[hour].push(
                 parseFloat(temp)
               );
-              // Calculate total and count for daily average
+
               formattedData[year][month][day].total += parseFloat(temp);
               formattedData[year][month][day].count += 1;
 
-              // Track temperature change
               const previousTemp = formattedData[year][month][day].previousTemp;
               formattedData[year][month][day].previousTemp = parseFloat(temp);
               formattedData[year][month][day].tempChange =
                 previousTemp !== null ? parseFloat(temp) - previousTemp : 0;
             });
 
-            // Compute daily averages
             Object.keys(formattedData).forEach((year) => {
               Object.keys(formattedData[year]).forEach((month) => {
                 Object.keys(formattedData[year][month]).forEach((day) => {
                   const dayData = formattedData[year][month][day];
-                  dayData.average = dayData.total / dayData.count; // Compute daily average
+                  dayData.average = dayData.total / dayData.count;
                 });
               });
             });
@@ -96,13 +93,13 @@ const DetailedHistory = () => {
 
   const getTemperatureColor = (change) => {
     if (change > 0) {
-      const redIntensity = Math.min(255, 255 * (change / 10)); // Adjust the red intensity based on change
-      return `rgb(${redIntensity}, 0, 0)`; // More red for rising temperature
+      const redIntensity = Math.min(255, 255 * (change / 10));
+      return `rgb(${redIntensity}, 0, 0)`;
     } else if (change < 0) {
-      const blueIntensity = Math.min(255, 255 * (-change / 10)); // Adjust the blue intensity based on change
-      return `rgb(0, 0, ${blueIntensity})`; // More blue for decreasing temperature
+      const blueIntensity = Math.min(255, 255 * (-change / 10));
+      return `rgb(0, 0, ${blueIntensity})`;
     }
-    return "black"; // No change
+    return "black";
   };
 
   if (loading) {
@@ -184,7 +181,7 @@ const DetailedHistory = () => {
                           className="border border-gray-400 p-2 text-center"
                           style={{
                             width: "72px",
-                            color: getTemperatureColor(change), // Dynamic color based on temperature change
+                            color: getTemperatureColor(change),
                           }}
                         >
                           {dayData?.average

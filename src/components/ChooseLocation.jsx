@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import WeatherLoader from "./weatherLoader/WeatherLoader";
 
 const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
+// const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
 
 const fetchCoordinates = async (city) => {
   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
@@ -23,18 +24,17 @@ const fetchWeather = async ({ queryKey }) => {
 };
 
 const ChooseLocation = () => {
-  const [city, setCity] = useState("Telavi");
+  const [city, setCity] = useState("Kutaisi");
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["weather", city],
     queryFn: fetchWeather,
-    refetchOnMount: true, // Forces the data to refetch when component mounts
-    refetchOnWindowFocus: false, // Disable refetching when the window is focused
+    refetchOnMount: true,
+    refetchOnWindowFocus: false,
   });
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Optionally, refetch data whenever city changes
     refetch();
   }, [city, refetch]);
 
@@ -46,7 +46,6 @@ const ChooseLocation = () => {
       </p>
     );
 
-  // Add a guard to ensure data is available
   const weatherData = data?.weather?.[0];
   const temperature = data?.main?.temp;
   const feelsLike = data?.main?.feels_like;

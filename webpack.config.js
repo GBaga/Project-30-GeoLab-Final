@@ -17,5 +17,5 @@ export const module = {
   ],
 };
 export const resolve = {
-  extensions: [".js", ".jsx"], // Add .jsx to resolve extensions
+  extensions: [".js", ".jsx"],
 };
