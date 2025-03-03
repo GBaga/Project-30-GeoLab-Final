@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import WeatherLoader from "./weatherLoader/WeatherLoader";
+import { locations } from "../config/locations"; // Adjust the path if needed
 
 const API_KEY = "cc0e6ec727472b3e6b3b3f227a8e69c5";
 // const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -66,27 +67,11 @@ const ChooseLocation = () => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
       >
-        <option value="Tbilisi">{t("Tbilisi")}</option>
-        <option value="Batumi">{t("Batumi")}</option>
-        <option value="Kutaisi">{t("Kutaisi")}</option>
-        <option value="Tsesi">{t("Tsesi")}</option>
-        <option value="Zugdidi">{t("Zugdidi")}</option>
-        <option value="Rustavi">{t("Rustavi")}</option>
-        <option value="Vani">{t("Vani")}</option>
-        <option value="Telavi">{t("Telavi")}</option>
-        <option value="Mtskheta">{t("Mtskheta")}</option>
-        <option value="Gori">{t("Gori")}</option>
-        <option value="Khashuri">{t("Khashuri")}</option>
-        <option value="Sighnaghi">{t("Sighnaghi")}</option>
-        <option value="Mestia">{t("Mestia")}</option>
-        <option value="Borjomi">{t("Borjomi")}</option>
-        <option value="Poti">{t("Poti")}</option>
-        <option value="Akhaltsikhe">{t("Akhaltsikhe")}</option>
-        <option value="Ambrolauri">{t("Ambrolauri")}</option>
-        <option value="Kobuleti">{t("Kobuleti")}</option>
-        <option value="Zestafoni">{t("Zestafoni")}</option>
-        <option value="Chkhorotsku">{t("Chkhorotsku")}</option>
-        <option value="Shorapani, GE">{t("Shorapani")}</option>
+        {locations.map((location) => (
+          <option key={location} value={location}>
+            {t(location)}
+          </option>
+        ))}
       </select>
 
       <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-fit">
@@ -134,7 +119,7 @@ const ChooseLocation = () => {
         to={`/forecast/${encodeURIComponent(city)}`}
         className="text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-6"
       >
-        {t("forecast-next-days")}{" "}
+        {t("forecast-next-days")}
       </Link>
     </div>
   );
