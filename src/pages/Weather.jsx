@@ -108,7 +108,7 @@ const Weather = () => {
 
   return (
     <div>
-      <h2 className="pt-10 px-10 mb-4 text-xl font-extrabold text-gray-900 dark:text-white md:text-2xl lg:text-3xl">
+      <h2 className="pt-10 px-10 mb-4 text-xl font-extrabold text-gray-900 md:text-2xl lg:text-3xl">
         {data.city.name === "Meria" ? "Tbilisi" : data.city.name}{" "}
         {t("forecast")}
       </h2>
